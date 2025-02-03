@@ -14,4 +14,8 @@ function dividir(a, b) {
   return a / b;
 }
 
-module.exports = { sumar, restar, multiplicar, dividir };
+function raizCuadrada(a) {
+  return Math.sqrt(a);
+}
+
+module.exports = { sumar, restar, multiplicar, dividir, raizCuadrada };
