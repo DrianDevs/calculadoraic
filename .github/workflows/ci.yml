@@ -1,6 +1,9 @@
-name: Integración Continua
+name: CI/CD con GitHub Pages
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
@@ -26,3 +29,22 @@ jobs:
 
       - name: Ejecutar pruebas
         run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Crear la carpeta de despligue
+        run: mkdir build
+          cp index.html public/
+          cp calculadora.js public/
+
+      - name: Desplegar en GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: public
